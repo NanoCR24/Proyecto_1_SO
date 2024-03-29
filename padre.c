@@ -8,7 +8,7 @@
 
 int main(int argc, char *argv[]) {
     if (argc != 3) {
-        printf("Uso: %s [cpu|ram|disco] <PID>\n", argv[0]);
+        printf("Se usa de la siguiente forma: %s [cpu|ram|disco] <PID>\n", argv[0]);
         return 1;
     }
 
