@@ -20,14 +20,13 @@ void ejecutarSubproceso(char *subprograma, char *opcion) {
     if (pid == -1) {
         perror("Error al crear el subproceso");
         exit(EXIT_FAILURE);
-    } else if (pid == 0) { 
+    } else if (pid == 0) {
         dup2(pipefd[1], STDOUT_FILENO);
-        close(pipefd[0]); 
-
-        execlp(subprograma, subprograma, opcion, NULL);
+        close(pipefd[0]);
+   execlp(subprograma, subprograma, opcion, NULL);
         perror("Error al ejecutar el subprograma");
         exit(EXIT_FAILURE);
-    } else { 
+    } else {
         close(pipefd[1]);
         char buffer[BUFFER_SIZE];
         ssize_t bytesLeidos;
@@ -45,10 +44,9 @@ void ejecutarSubproceso(char *subprograma, char *opcion) {
     }
 }
 
-
 int main(int argc, char *argv[]) {
     if (argc < 2 && argc > 4) {
-        fprintf(stderr, "Se debe utilizar de la siguiente manera: %s <cpu, disk, memoria> <argumento especifico> \n", >
+        fprintf(stderr, "Se debe utilizar de la siguiente manera: %s <cpu, disk, memoria> <argumento especifico> \n",argv[0]);
         exit(EXIT_FAILURE);
     }
     char *recurso = argv[1];
@@ -56,13 +54,13 @@ int main(int argc, char *argv[]) {
     if (argc > 2) {
         opcion = argv[2];
     }
-    
+
     if (strcmp(recurso, "cpu") == 0) {
         ejecutarSubproceso("./cpu", opcion);
     } else if (strcmp(recurso, "memoria") == 0) {
         ejecutarSubproceso("./memoria", opcion);
     } else if (strcmp(recurso, "disk") == 0) {
-        if (opcion != NULL && (strcmp(opcion, "-tm") == 0 || strcmp(opcion, "-tg") == 0 || strcmp(opcion, "-tk") == 0)>
+        if (opcion != NULL && (strcmp(opcion, "-tm") == 0 || strcmp(opcion, "-tg") == 0 || strcmp(opcion, "-tk") == 0)){
             ejecutarSubproceso("./disk", opcion);
         } else {
             fprintf(stderr, "Uso general:./programa disk <argumento> \n");
@@ -76,5 +74,4 @@ int main(int argc, char *argv[]) {
 
     return 0;
 }
-
 
