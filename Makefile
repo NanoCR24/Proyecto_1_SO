@@ -1,21 +1,31 @@
-all: programa cpu ram disco
-
 programa: programa.c
-    gcc -o programa programa.c -Wall
+
+	gcc -o programa programa.c -Wall
+
 
 cpu: cpu.c
-    gcc -o cpu cpu.c -Wall
+
+	gcc -o cpu cpu.c -Wall
+
 
 ram: ram.c
-    gcc -o ram ram.c -Wall
 
-disco: disco.c
-    gcc -o disco disco.c -Wall
+	gcc -o ram ram.c -Wall
 
-install:
-    cp programa cpu ram disco /usr/local/bin
+
+disk: disk.c
+
+	gcc -o disk disk.c -Wall
+
+
+install: programa cpu ram disk
+
+	cp programa cpu ram disk /usr/local/bin
+
 
 .PHONY: clean
 
+
 clean:
-    rm -f programa cpu ram disco
+
+	rm -f programa cpu ram disk
