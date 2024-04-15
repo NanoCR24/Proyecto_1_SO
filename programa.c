@@ -62,18 +62,18 @@ int main(int argc, char *argv[]) {
 
     if (strcmp(recurso, "cpu") == 0) {
         ejecutarSubproceso("./cpu", opcion, NULL);
-    } else if (strcmp(recurso, "memoria") == 0) {
+    } else if (strcmp(recurso, "ram") == 0) {
         if (opcion != NULL && (strcmp(opcion, "-v") == 0 || strcmp(opcion, "-r") == 0)){
             char* pid = NULL;
             if(argc > 3){
                 pid = argv[3];
-                ejecutarSubproceso("./memoria", opcion, pid);
+                ejecutarSubproceso("./ram", opcion, pid);
             }
             else{
-                ejecutarSubproceso("./memoria", opcion, NULL);
+                ejecutarSubproceso("./ram", opcion, NULL);
             }
         } else {
-            fprintf(stderr, "Uso general:./programa memoria <argumento> <PID> \n");
+            fprintf(stderr, "Uso general:./programa ram <argumento> <PID> \n");
             fprintf(stderr, "Argumentos: <-v, -r> \n");
             exit(EXIT_FAILURE);
         }
